@@ -15,7 +15,7 @@ onMounted(async () => {
 
 <template>
   <div>
-    <h1>Liste des Événements</h1>
+    <h1>Liste des Événementsssss</h1>
     <ul>
       <li v-for="event in events" :key="event.id">
         {{ event.name }}
