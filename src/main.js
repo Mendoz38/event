@@ -1,11 +1,12 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+import Antd from 'ant-design-vue'
+import './assets/main.css'
 
-app.use(router)
+createApp(App)
+  .use(Antd)
+  .use(router)
 
-app.mount('#app')
+  .mount('#app')

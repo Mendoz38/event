@@ -1,35 +1,55 @@
 @import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+body {
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #222;
+  background-color: #f5f7fb;
+  margin: 0;
+  padding: 0;
 }
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.black {
+  color: #000;
 }
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.grey {
+  color: #c7c7c7;
+}
+.main50 {
+  color: #8bddcd;
+}
+.darkBg {
+  background-color: #121933;
+}
+.darkGrey {
+  background-color: #495270;
+}
+.main {
+  color: #249781;
+}
+.darkLight {
+  background-color: #172f53;
+}
+.red {
+  color: #ff313d;
+}
+.main20 {
+  color: #daf6f1;
+}
+.orange {
+  color: #ffa141;
+}
+.blue {
+  color: #00a3b8;
 }
 
 @media (min-width: 1024px) {
-  body {
+  html {
+    width: 500px;
     display: flex;
     place-items: center;
   }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  .nav-bar {
+    width: 500px !important;
   }
 }

@@ -1,25 +1,30 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
+<template>
+  <a-config-provider :theme="customTheme">
+    <RouterView />
+    <NavBar />
+  </a-config-provider>
+</template>
 
-const events = ref([])
+<script setup>
+import NavBar from './components/NavBar.vue'
+import { computed } from 'vue'
+import { theme } from 'ant-design-vue'
 
-onMounted(async () => {
-  try {
-    const response = await fetch('http://localhost:3000/events')
-    events.value = await response.json()
-  } catch (error) {
-    console.error('Error fetching events:', error)
-  }
-})
+const { defaultAlgorithm } = theme
+
+const customTheme = computed(() => ({
+  algorithm: defaultAlgorithm,
+  token: {
+    colorPrimary: '#249781',
+    colorSuccess: '#52c41a',
+    colorWarning: '#faad14',
+    colorError: '#f5222d',
+  },
+}))
 </script>
 
-<template>
-  <div>
-    <h1>Liste des Événementsssss</h1>
-    <ul>
-      <li v-for="event in events" :key="event.id">
-        {{ event.name }}
-      </li>
-    </ul>
-  </div>
-</template>
+<style scoped>
+#app {
+  display: flex;
+}
+</style>
