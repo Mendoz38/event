@@ -16,7 +16,7 @@
         <div class="events">
           <h2>Evenements</h2>
           <div class="events-list">
-            <ListEvent :events="events" />
+            <ListEvent />
           </div>
         </div>
       </a-layout-content>

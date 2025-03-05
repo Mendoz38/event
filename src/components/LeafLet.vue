@@ -1,49 +1,55 @@
 <template>
-  <div style="height: 100vh; width: 100%">
-    <l-map ref="map" v-model:zoom="zoom" :center="[45.41322, 1.219482]">
-      <l-geo-json :geojson="geojson" :options="geojsonOptions" />
-      <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        layer-type="base"
-        name="OpenStreetMap"
-      ></l-tile-layer>
-    </l-map>
-  </div>
+  <l-map ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false">
+    <l-tile-layer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      layer-type="base"
+      name="OpenStreetMap"
+    ></l-tile-layer>
+    <l-marker v-if="markerPosition" :lat-lng="markerPosition"></l-marker>
+  </l-map>
 </template>
 
-<script>
-// DON'T load Leaflet components here!
-// Its CSS is needed though, if not imported elsewhere in your application.
+<script setup>
+import { ref, computed, watch, defineProps } from 'vue'
 import 'leaflet/dist/leaflet.css'
-import { LMap, LTileLayer, LGeoJson } from '@vue-leaflet/vue-leaflet'
+import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
 
-export default {
-  components: {
-    LMap,
-    LGeoJson,
-    LTileLayer,
+const props = defineProps({
+  lat: {
+    type: Number,
+    default: 0.0,
   },
-  data() {
-    return {
-      zoom: 6,
-      geojson: {
-        type: 'FeatureCollection',
-        features: [
-          // ...
-        ],
-      },
-      geojsonOptions: {
-        // Options that don't rely on Leaflet methods.
-      },
+  lng: {
+    type: Number,
+    default: 0.0,
+  },
+})
+
+const zoom = ref(13)
+const center = ref([0, 0])
+
+watch(
+  // pour être sur que les props soient récupérés avant l'affichage
+  () => [props.lat, props.lng],
+  ([newLat, newLng]) => {
+    if (newLat && newLng) {
+      center.value = [newLat, newLng]
     }
   },
-  async beforeMount() {
-    // HERE is where to load Leaflet components!
-    const { circleMarker } = await import('leaflet/dist/leaflet-src.esm')
+  { immediate: true },
+)
 
-    // And now the Leaflet circleMarker function can be used by the options:
-    this.geojsonOptions.pointToLayer = (feature, latLng) => circleMarker(latLng, { radius: 8 })
-    this.mapIsReady = true
-  },
-}
+const markerPosition = computed(() => {
+  if (props.lat && props.lng) {
+    return [props.lat, props.lng]
+  }
+  return null
+})
 </script>
+
+<style scoped>
+main {
+  height: 100vh;
+  width: 100vw;
+}
+</style>

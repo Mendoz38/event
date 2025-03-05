@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/events/${id}`" class="nav-item">
+  <router-link :to="`/event/${id}`" class="nav-item">
     <a-card :bordered="false" class="event-card">
       <div class="event-card-container">
         <img class="event-image" :src="`/${picture}`" :alt="name" />

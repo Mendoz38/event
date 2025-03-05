@@ -6,7 +6,7 @@
       </router-link>
     </span>
     <span>
-      <router-link to="/events" class="navbar-item">
+      <router-link to="/" class="navbar-item">
         <CustomerServiceOutlined />
       </router-link>
     </span>
