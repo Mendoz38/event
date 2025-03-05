@@ -16,7 +16,15 @@
         <div class="events">
           <h2>Evenements</h2>
           <div class="events-list">
-            <ListEvent />
+            <div v-for="event in events" :key="event.id">
+              <EventC
+                :id="event.id"
+                :name="event.name"
+                :picture="event.picture"
+                :address="event.address.display_name"
+                :start_at="event.start_at"
+              />
+            </div>
           </div>
         </div>
       </a-layout-content>
@@ -27,13 +35,32 @@
 import { onMounted, ref } from 'vue'
 import SearchBar from '../components/SearchBar.vue'
 import CategoryC from '../components/CategoryC.vue'
-import ListEvent from '@/components/ListEvent.vue'
+import EventC from '@/components/EventC.vue'
 import { getEvents } from '@/api/Events.js'
+import { reverseGeocode } from '@/api/GeoCoding.js'
 
 const events = ref([])
 
 onMounted(async () => {
-  events.value = await getEvents()
+  const fetchedEvents = await getEvents()
+  events.value = fetchedEvents
+
+  for (let i = 0; i < fetchedEvents.length; i++) {
+    const event = fetchedEvents[i]
+    const [lng, lat] = event?.address?.coordinates || []
+    if (lat && lng) {
+      try {
+        const address = await reverseGeocode(lat, lng)
+        // Mise à jour explicite pour forcer la réactivité
+        events.value[i] = { ...event, address: { ...event.address, display_name: address } }
+      } catch (error) {
+        events.value[i] = {
+          ...event,
+          address: { ...event.address, display_name: 'Adresse non disponible' },
+        }
+      }
+    }
+  }
 })
 </script>
 

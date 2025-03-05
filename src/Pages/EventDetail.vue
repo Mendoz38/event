@@ -8,7 +8,7 @@
         <div class="events">
           <h1>{{ event.name }}</h1>
           <p class="date"><CalendarOutlined /> Du {{ start_at }} au {{ end_at }}</p>
-          <p class="place"><EnvironmentOutlined /> Issy</p>
+          <p class="place"><EnvironmentOutlined /> {{ address }}</p>
           <p>{{ event.desc }}</p>
         </div>
       </a-layout-content>
@@ -28,12 +28,26 @@ import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons-vue'
 /*------------- API --------------*/
 import { useRoute } from 'vue-router'
 import { getEventById } from '@/api/Events.js'
+import { reverseGeocode } from '@/api/GeoCoding.js'
 
 const route = useRoute()
 const event = ref([])
+const address = ref(null)
 
+/*------------- REVERSE GEOCODDING --------------*/
 onMounted(async () => {
   event.value = await getEventById(route.params.id)
+
+  const lat = event?.value.address.coordinates[1]
+  const lng = event?.value.address.coordinates[0]
+
+  if (lat && lng) {
+    try {
+      address.value = await reverseGeocode(lat, lng)
+    } catch (error) {
+      ;(address.value = "Impossible de récupérer l'adresse"), error
+    }
+  }
 })
 
 /*------------- LEAFLET --------------*/
@@ -79,5 +93,9 @@ const end_at = computed(() => {
 }
 .map {
   background-color: aquamarine;
+}
+.place {
+  font-weight: bold;
+  margin: 5px 0;
 }
 </style>

@@ -6,8 +6,8 @@
         <div class="event-details">
           <p class="event-category">Food</p>
           <h3 class="event-title">{{ name }}</h3>
-          <p class="event-date">21 mai 2025</p>
-          <p class="event-location">Grenoble</p>
+          <p class="event-date">{{ start_at_fr }}</p>
+          <p class="event-location">{{ address }}</p>
         </div>
         <div class="event-prices">
           <span class="original-price">55 €</span>
@@ -19,13 +19,25 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, computed } from 'vue'
 
-// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   id: String,
   name: String,
   picture: String,
+  address: String,
+  start_at: String,
+})
+
+/*------------- DAYJS --------------*/
+import dayjs from 'dayjs'
+import 'dayjs/locale/fr'
+console.log('props.start_at', props.start_at)
+const start_at_fr = computed(() => {
+  if (props.start_at) {
+    return dayjs(props.start_at).locale('fr').format('dddd D MMMM YYYY ')
+  }
+  return ''
 })
 </script>
 
