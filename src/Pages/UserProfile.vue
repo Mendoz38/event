@@ -20,9 +20,12 @@
   <h1 class="main50">TEST</h1>
   <home-outlined />
   <setting-filled />
+
+  <ButtonPhoto />
 </template>
 
 <script setup>
+import ButtonPhoto from '@/components/ButtonPhoto.vue'
 import { HomeOutlined, SettingFilled } from '@ant-design/icons-vue'
 </script>
 

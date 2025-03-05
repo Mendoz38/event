@@ -53,6 +53,7 @@ onMounted(async () => {
         const address = await reverseGeocode(lat, lng)
         // Mise à jour explicite pour forcer la réactivité
         events.value[i] = { ...event, address: { ...event.address, display_name: address } }
+        // eslint-disable-next-line no-unused-vars
       } catch (error) {
         events.value[i] = {
           ...event,

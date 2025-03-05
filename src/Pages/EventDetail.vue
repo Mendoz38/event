@@ -12,6 +12,9 @@
           <p>{{ event.desc }}</p>
         </div>
       </a-layout-content>
+
+      <ButtonPhoto />
+
       <div style="height: 400px; width: 100%" class="map">
         <LeafLet :lat="event?.address?.coordinates[1]" :lng="event?.address?.coordinates[0]" />
       </div>
@@ -24,6 +27,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons-vue'
+import ButtonPhoto from '@/components/ButtonPhoto.vue'
 
 /*------------- API --------------*/
 import { useRoute } from 'vue-router'
