@@ -29,10 +29,10 @@ const captureImage = async () => {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
 
       const imageData = canvas.toDataURL('image/png')
-      console.log(imageData) // Ici tu peux l'afficher ou l'envoyer à un serveur
+      console.log(imageData)
 
-      stream.getTracks().forEach((track) => track.stop()) // Arrêter la caméra
-    }, 1000) // Temps d'attente pour la mise au point
+      stream.getTracks().forEach((track) => track.stop())
+    }, 1000)
   } catch (error) {
     console.error('Erreur d’accès à la caméra:', error)
   }
