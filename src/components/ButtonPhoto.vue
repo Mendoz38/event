@@ -1,38 +1,42 @@
 <template>
-  <button @click="openCamera">Ajouter une photo</button>
-  <div v-if="capturedImage">
-    <p>Aperçu :</p>
-    <img :src="capturedImage" alt="Captured" style="max-width: 100%; height: auto" />
-  </div>
-  <a-button type="primary" :size="size">
+  <a-button type="primary" :size="size" @click="captureImage">
     <template #icon>
       <PictureOutlined />
     </template>
     Ajoute tes photos
   </a-button>
+  <br />
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { PictureOutlined } from '@ant-design/icons-vue'
 
-const capturedImage = ref(null)
+const size = ref('default')
 
-const openCamera = async () => {
+const captureImage = async () => {
   try {
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = 'image/*'
-    input.capture = 'environment' // Ouvre directement l'appareil photo
-    input.addEventListener('change', (event) => {
-      const file = event.target.files[0]
-      if (file) {
-        capturedImage.value = URL.createObjectURL(file)
-      }
-    })
-    input.click()
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+    const video = document.createElement('video')
+    video.srcObject = stream
+    video.play()
+
+    setTimeout(() => {
+      const canvas = document.createElement('canvas')
+      canvas.width = video.videoWidth
+      canvas.height = video.videoHeight
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+
+      const imageData = canvas.toDataURL('image/png')
+      console.log(imageData) // Ici tu peux l'afficher ou l'envoyer à un serveur
+
+      stream.getTracks().forEach((track) => track.stop()) // Arrêter la caméra
+    }, 1000) // Temps d'attente pour la mise au point
   } catch (error) {
-    console.error('Erreur lors de l’ouverture de la caméra :', error)
+    console.error('Erreur d’accès à la caméra:', error)
   }
 }
 </script>
+
+<script setup></script>
