@@ -1,34 +1,40 @@
 <template>
-  <div>
-    <button @click="openCameraApp">Ouvrir l'application photo</button>
-    <input
-      type="file"
-      accept="image/*"
-      capture="environment"
-      ref="fileInput"
-      style="display: none"
-      @change="handleFileChange"
-    />
-  </div>
+  <a-button class="bouton-photo" type="primary" :size="size" @click="openCamera">
+    <template #icon>
+      <PictureOutlined />
+    </template>
+    Ajoute tes photos
+  </a-button>
+  <br />
 </template>
 
-<script>
-export default {
-  methods: {
-    openCameraApp() {
-      this.$refs.fileInput.click()
-    },
-    handleFileChange(event) {
+<script setup>
+import { ref } from 'vue'
+import { PictureOutlined } from '@ant-design/icons-vue'
+
+const capturedImage = ref(null)
+
+const openCamera = async () => {
+  try {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.capture = 'environment'
+    input.addEventListener('change', (event) => {
       const file = event.target.files[0]
       if (file) {
-        console.log('Photo capturée :', file)
-        // Vous pouvez traiter le fichier ici, par exemple l'afficher ou l'envoyer à un serveur
+        capturedImage.value = URL.createObjectURL(file)
       }
-    },
-  },
+    })
+    input.click()
+  } catch (error) {
+    console.error('Erreur lors de l’ouverture de la caméra :', error)
+  }
 }
 </script>
 
-<style scoped>
-/* Ajoutez des styles si nécessaire */
+<style>
+.bouton-photo {
+  margin-bottom: 10px;
+}
 </style>
