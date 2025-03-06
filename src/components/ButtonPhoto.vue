@@ -1,11 +1,18 @@
 <template>
-  <a-button type="primary" :size="size" @click="captureImage">
+  <a-button type="primary" :size="size" @click="openCamera">
     <template #icon>
       <PictureOutlined />
     </template>
-    Ajoute tes photos
+    Ajoute tes photoss
   </a-button>
-  <br />
+  <input
+    ref="fileInput"
+    type="file"
+    accept="image/*"
+    capture="environment"
+    style="display: none"
+    @change="handleFileChange"
+  />
 </template>
 
 <script setup>
@@ -13,30 +20,17 @@ import { ref } from 'vue'
 import { PictureOutlined } from '@ant-design/icons-vue'
 
 const size = ref('default')
+const fileInput = ref(null)
 
-const captureImage = async () => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-    const video = document.createElement('video')
-    video.srcObject = stream
-    video.play()
+const openCamera = () => {
+  fileInput.value.click()
+}
 
-    setTimeout(() => {
-      const canvas = document.createElement('canvas')
-      canvas.width = video.videoWidth
-      canvas.height = video.videoHeight
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-      const imageData = canvas.toDataURL('image/png')
-      console.log(imageData)
-
-      stream.getTracks().forEach((track) => track.stop())
-    }, 1000)
-  } catch (error) {
-    console.error('Erreur d’accès à la caméra:', error)
+const handleFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    const imageUrl = URL.createObjectURL(file)
+    console.log(imageUrl) // Afficher ou traiter l'image sélectionnée
   }
 }
 </script>
-
-<script setup></script>
