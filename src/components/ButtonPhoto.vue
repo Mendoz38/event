@@ -3,13 +3,13 @@
     <template #icon>
       <PictureOutlined />
     </template>
-    Ajoute tes photoss
+    Ajoute ta photo
   </a-button>
   <input
     ref="fileInput"
     type="file"
     accept="image/*"
-    capture="environment"
+    capture
     style="display: none"
     @change="handleFileChange"
   />
