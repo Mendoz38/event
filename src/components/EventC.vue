@@ -6,8 +6,11 @@
         <div class="event-details">
           <p class="event-category">Food</p>
           <h3 class="event-title">{{ name }}</h3>
-          <p class="event-date">{{ start_at_fr }}</p>
-          <p class="event-location">{{ address }}</p>
+          <p class="event-date"><CalendarOutlined /> {{ start_at_fr }}</p>
+          <p class="event-location">
+            <EnvironmentOutlined />
+            {{ address }}
+          </p>
         </div>
         <div class="event-prices">
           <span class="original-price">55 €</span>
@@ -20,6 +23,7 @@
 
 <script setup>
 import { defineProps, computed } from 'vue'
+import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps({
   id: String,
