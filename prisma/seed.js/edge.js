@@ -143,7 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\---CODE---\\SIMPLON_2024\\vue4\\prisma\\seed.js",
+      "value": "/app/prisma/seed.js",
       "fromEnvVar": null
     },
     "config": {
@@ -152,16 +152,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\---CODE---\\SIMPLON_2024\\vue4\\prisma\\schema.prisma",
+    "sourceFilePath": "/app/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "..",
@@ -171,6 +171,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -179,8 +180,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator seed {\n  provider = \"prisma-client-js\"\n  output   = \"./seed.js\"\n}\n\nmodel Event {\n  id         String   @id @default(uuid())\n  name       String\n  desc       String\n  picture    String\n  address    Json\n  start_at   DateTime\n  end_at     DateTime\n  created_at DateTime @default(now())\n  photos     Photo[]\n}\n\nmodel Photo {\n  id          String   @id @default(uuid())\n  event_id    String\n  url         String\n  uploaded_at DateTime @default(now())\n  event       Event    @relation(fields: [event_id], references: [id])\n}\n",
-  "inlineSchemaHash": "bccf3eca7275871a18fdb798336b0f0389dae13a99cb948bf21e0a37457b8335",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\ngenerator seed {\n  provider = \"prisma-client-js\"\n  output   = \"./seed.js\"\n}\n\nmodel Event {\n  id         String   @id @default(uuid())\n  name       String\n  desc       String\n  picture    String\n  address    Json\n  start_at   DateTime\n  end_at     DateTime\n  created_at DateTime @default(now())\n  photos     Photo[]\n}\n\nmodel Photo {\n  id          String   @id @default(uuid())\n  event_id    String\n  url         String\n  uploaded_at DateTime @default(now())\n  event       Event    @relation(fields: [event_id], references: [id])\n}\n",
+  "inlineSchemaHash": "c50385441b4a4cf2525b046a411bda6f861db9ad9c15f82e7ec5a448abe28ae5",
   "copyEngine": true
 }
 config.dirname = '/'
