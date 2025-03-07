@@ -18,6 +18,8 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm i
+      - name: Générer les snapshots pour qu'ils soient nomé linux
+        run: npm run test:generate-snapshots
       - name: Install Playwright browsers
         run: npx playwright install
       - name: Start Vite server
