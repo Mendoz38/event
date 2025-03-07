@@ -4,8 +4,8 @@
       <a-layout-header class="header" aria-label="Image verte pour contraste"> </a-layout-header>
       <a-layout-content class="content">
         <SearchBar />
+        <h2 class="category-name">Catégories</h2>
         <div class="category">
-          <h2>Catégories</h2>
           <a-space>
             <CategoryC size="large" name="Music" icon="iconSoiree" color="#249781" />
             <CategoryC size="large" name="Sport" icon="iconSport" color="blue" />
@@ -103,5 +103,11 @@ h2 {
   margin: 5px;
   display: flex;
   flex-direction: row;
+}
+
+@media (min-width: 1024px) {
+  .category-name {
+    display: none;
+  }
 }
 </style>

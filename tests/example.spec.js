@@ -1,19 +1,18 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
 test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.goto('http://localhost:5173/')
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  await expect(page).toHaveTitle('Evently App')
+})
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+// test('Active color', async ({ page }) => {
+//   await page.goto('http://localhost:5173/maps')
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+//   // Vérifier si l'élément est visible et actif
+//   const isActive = await page.isVisible('a.router-link-active[aria-current="page"][href="/"]')
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+//   expect(isActive).toBeTruthy()
+// })
