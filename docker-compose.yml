@@ -1,0 +1,13 @@
+#### Event Vue ###
+services:
+  event_vue: #### event_vue ###
+    image: node:18-alpine
+    container_name: event_vue
+    working_dir: /app
+    volumes:
+      - ./:/app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"

@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"node server.js\" \"vite\"",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
@@ -35,6 +36,7 @@
     "concurrently": "^9.1.2",
     "eslint": "^9.20.1",
     "eslint-plugin-vue": "^9.32.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "leaflet": "^1.9.4",
     "less": "^4.2.2",
