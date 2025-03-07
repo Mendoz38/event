@@ -13,8 +13,13 @@ test.describe('Responsive Visual Regression', () => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height })
       await page.goto('http://localhost:5173/')
 
+      // Masquer l'élément avec la classe 'avatar'
+      //await page.locator('.avatar').evaluate((node) => (node.style.visibility = 'hidden'))
+      await expect(page).toHaveScreenshot(`screenshot-${viewport.name}.png`, {
+        mask: [page.locator('.avatar')],
+      })
       // Capture et vérifie le screenshot
-      await expect(page).toHaveScreenshot(`screenshot-${viewport.name}.png`)
+      //  await expect(page).toHaveScreenshot(`screenshot-${viewport.name}.png`)
     })
   }
 })

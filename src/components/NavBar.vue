@@ -17,7 +17,7 @@
     </span>
     <span>
       <router-link to="/profile" class="navbar-item">
-        <a-avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" />
+        <a-avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=1" class="avatar" />
       </router-link>
     </span>
   </div>
