@@ -19,11 +19,6 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Générer les snapshots pour qu'ils soient nomé linux
-        run: npx playwright test --update-snapshots
-
       - name: Install Playwright browsers
         run: npx playwright install
       - name: Start Vite server
