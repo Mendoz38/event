@@ -18,6 +18,9 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm i
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Générer les snapshots pour qu'ils soient nomé linux
         run: npx playwright test --update-snapshots
 
