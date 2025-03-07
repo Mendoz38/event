@@ -19,7 +19,8 @@ jobs:
       - name: Install dependencies
         run: npm i
       - name: Générer les snapshots pour qu'ils soient nomé linux
-        run: npm run test:generate-snapshots
+        run: npm run te2e-generate
+
       - name: Install Playwright browsers
         run: npx playwright install
       - name: Start Vite server
