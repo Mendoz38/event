@@ -10,8 +10,7 @@
     "test:unit": "vitest",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "prisma:generate": "prisma generate",
-    "prepare": "husky"
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
@@ -27,6 +26,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@playwright/test": "^1.51.0",
+    "@types/node": "^22.13.9",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vitest/eslint-plugin": "1.1.31",
